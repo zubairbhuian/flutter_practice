@@ -22,6 +22,35 @@ class MyApp extends StatelessWidget {
   }
 }
 
+List<dynamic> note = [
+  'A',
+  'B',
+  'C',
+  'D',
+  'E',
+  'F',
+  'G',
+  'H',
+  'I',
+  'J',
+  'K',
+  'L',
+  'M',
+  'N',
+  'O',
+  'P',
+  'Q',
+  'R',
+  'S',
+  'T',
+  'U',
+  'V',
+  'W',
+  'X',
+  'Y',
+  'Z'
+];
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
@@ -36,42 +65,28 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           title: const Text('Grid View'),
         ),
-        body: GridView.count(
-          crossAxisCount: 3,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+        body: GridView.builder(
+          itemCount: note.length,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 4),
+          itemBuilder: (_, index) {
+            return Padding(
+              padding: const EdgeInsets.all(4.0),
               child: Container(
                 height: 100,
                 width: 100,
                 color: Colors.blue,
+                child: Center(
+                    child: Text(
+                  "${note[index]}",
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
+                )),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: 100,
-                width: 100,
-                color: Colors.blue,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: 100,
-                width: 100,
-                color: Colors.blue,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: 100,
-                width: 100,
-                color: Colors.blue,
-              ),
-            ),
-          ],
+            );
+          },
         ));
   }
 }
