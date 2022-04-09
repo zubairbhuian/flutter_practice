@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         // is not restarted.
@@ -27,6 +28,7 @@ class MyHomePage extends StatefulWidget {
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
+
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
@@ -34,9 +36,42 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           title: const Text('Grid View'),
         ),
-        body: const Center(
-          child: Text(
-              "Demo"), // This trailing comma makes auto-formatting nicer for build methods.
+        body: GridView.count(
+          crossAxisCount: 3,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 100,
+                width: 100,
+                color: Colors.blue,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 100,
+                width: 100,
+                color: Colors.blue,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 100,
+                width: 100,
+                color: Colors.blue,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 100,
+                width: 100,
+                color: Colors.blue,
+              ),
+            ),
+          ],
         ));
   }
 }
