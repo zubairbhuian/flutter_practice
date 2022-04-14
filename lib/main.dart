@@ -49,6 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Duration position = Duration.zero;
   @override
   void initState() {
+    setAudio();
     // !Listen to state:playing,paused,stopped
     audioPlayer.onPlayerStateChanged.listen((state) {
       setState(() {
@@ -68,8 +69,18 @@ class _MyHomePageState extends State<MyHomePage> {
         position = newPosition;
       });
     });
-    
+
     super.initState();
+  }
+
+  //  ?SetAudio
+  Future setAudio() async {
+    //  !Repeat song when completed
+    audioPlayer.setReleaseMode(ReleaseMode.LOOP);
+    // !Load audio from assets
+    final player = AudioCache(prefix: 'assets/');
+    final url = await player.load('alif.mp3');
+    audioPlayer.setUrl(url.path, isLocal: true);
   }
 
   @override
@@ -137,9 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   if (isPlaying) {
                     await audioPlayer.pause();
                   } else {
-                    String url =
-                        "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
-                    await audioPlayer.play(url);
+                    await audioPlayer.resume();
                   }
                 }),
           )
