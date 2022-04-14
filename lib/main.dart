@@ -47,6 +47,29 @@ class _MyHomePageState extends State<MyHomePage> {
   bool isPlaying = false;
   Duration duration = Duration.zero;
   Duration position = Duration.zero;
+  @override
+  void initState() {
+    // !Listen to state:playing,paused,stopped
+    audioPlayer.onPlayerStateChanged.listen((state) {
+      setState(() {
+        isPlaying = state == PlayerState.PLAYING;
+      });
+    });
+// ! Listion to audio duration
+    audioPlayer.onDurationChanged.listen((newDuration) {
+      setState(() {
+        duration = newDuration;
+      });
+    });
+
+    // !Listion to audio Position
+    audioPlayer.onAudioPositionChanged.listen((newPosition) {
+      setState(() {
+        position = newPosition;
+      });
+    });
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -86,7 +109,12 @@ class _MyHomePageState extends State<MyHomePage> {
           min: 0,
           max: duration.inSeconds.toDouble(),
           value: position.inSeconds.toDouble(),
-          onChanged: (value) async {},
+          onChanged: (value) async {
+            final position = Duration(seconds: value.toInt());
+            await audioPlayer.seek(position);
+            //  !Optinal: Play audio if was paused
+            await audioPlayer.resume();
+          },
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -97,6 +125,20 @@ class _MyHomePageState extends State<MyHomePage> {
               Text(formatTime(duration - position)),
             ],
           ),
+        ),
+        CircleAvatar(
+          radius: 35,
+          child: IconButton(
+              icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
+              onPressed: () async {
+                if (isPlaying) {
+                  await audioPlayer.pause();
+                } else {
+                  String url =
+                      "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
+                  await audioPlayer.play(url);
+                }
+              }),
         )
       ],
     ));
