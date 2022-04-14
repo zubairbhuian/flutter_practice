@@ -23,18 +23,18 @@ class MyApp extends StatelessWidget {
 }
 
 List<dynamic> note = [
-  'A',
-  'B',
-  'C',
-  'D',
-  'E',
-  'F',
-  'G',
-  'H',
-  'I',
-  'J',
-  'K',
-  'L',
+  'أ',
+  'ب',
+  'ت',
+  'ث',
+  'ج',
+  'ح',
+  'خ',
+  'د',
+  'ذ',
+  'ر',
+  'ز',
+  'س',
   'M',
   'N',
   'O',
@@ -66,6 +66,8 @@ class _MyHomePageState extends State<MyHomePage> {
           title: const Text('Grid View'),
         ),
         body: GridView.builder(
+          
+          // reverse: true,
           itemCount: note.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 4),
