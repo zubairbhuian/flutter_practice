@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -27,16 +28,34 @@ class MyHomePage extends StatefulWidget {
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
+
 class _MyHomePageState extends State<MyHomePage> {
+  final audioPlayer = AudioPlayer();
+  bool isPlaying = false;
+  Duration duration = Duration.zero;
+  Duration position = Duration.zero;
+
+  @override
+  void dispose() {
+    audioPlayer.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Grid View'),
-        ),
-        body: const Center(
-          child: Text(
-              "Demo"), // This trailing comma makes auto-formatting nicer for build methods.
-        ));
+        body: Column(
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Image.network(
+            'https://scontent.fdac3-1.fna.fbcdn.net/v/t1.6435-1/123042841_945908579151890_6246602248743437967_n.jpg?stp=dst-jpg_p240x240&_nc_cat=109&ccb=1-5&_nc_sid=7206a8&_nc_eui2=AeE_H0d-mH39OysN5a0qVKJzONjtsS8E12I42O2xLwTXYuSdhNRxWIyj59WjUrCCHZGS3F2ibpUTzwGM7PXONha2&_nc_ohc=LpRttGcJpToAX8_8IIn&_nc_ht=scontent.fdac3-1.fna&oh=00_AT9hS2GcgRzLdnCwc4_jYr2oRYLT2bhHTB95Bo-hiw1-Qw&oe=627E0B61',
+            width: double.infinity,
+            height: 350,
+            fit: BoxFit.cover,
+          ),
+        )
+      ],
+    ));
   }
 }
