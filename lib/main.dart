@@ -68,6 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
         position = newPosition;
       });
     });
+    
     super.initState();
   }
 
@@ -80,67 +81,70 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Image.network(
-            'https://scontent.fdac3-1.fna.fbcdn.net/v/t1.6435-1/123042841_945908579151890_6246602248743437967_n.jpg?stp=dst-jpg_p240x240&_nc_cat=109&ccb=1-5&_nc_sid=7206a8&_nc_eui2=AeE_H0d-mH39OysN5a0qVKJzONjtsS8E12I42O2xLwTXYuSdhNRxWIyj59WjUrCCHZGS3F2ibpUTzwGM7PXONha2&_nc_ohc=LpRttGcJpToAX8_8IIn&_nc_ht=scontent.fdac3-1.fna&oh=00_AT9hS2GcgRzLdnCwc4_jYr2oRYLT2bhHTB95Bo-hiw1-Qw&oe=627E0B61',
-            width: double.infinity,
-            height: 350,
-            fit: BoxFit.cover,
+        body: Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Image.network(
+              'https://scontent.fdac3-1.fna.fbcdn.net/v/t1.6435-1/123042841_945908579151890_6246602248743437967_n.jpg?stp=dst-jpg_p240x240&_nc_cat=109&ccb=1-5&_nc_sid=7206a8&_nc_eui2=AeE_H0d-mH39OysN5a0qVKJzONjtsS8E12I42O2xLwTXYuSdhNRxWIyj59WjUrCCHZGS3F2ibpUTzwGM7PXONha2&_nc_ohc=LpRttGcJpToAX8_8IIn&_nc_ht=scontent.fdac3-1.fna&oh=00_AT9hS2GcgRzLdnCwc4_jYr2oRYLT2bhHTB95Bo-hiw1-Qw&oe=627E0B61',
+              width: double.infinity,
+              height: 350,
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        const SizedBox(
-          height: 24,
-          child: Text(
-            'The Flutter Song',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+          const SizedBox(
+            height: 24,
+            child: Text(
+              'The Flutter Song',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
+            ),
           ),
-        ),
-        const SizedBox(
-          height: 24,
-          child: Text(
-            'Zubair Bhuian',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+          const SizedBox(
+            height: 24,
+            child: Text(
+              'Zubair Bhuian',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+            ),
           ),
-        ),
-        Slider(
-          min: 0,
-          max: duration.inSeconds.toDouble(),
-          value: position.inSeconds.toDouble(),
-          onChanged: (value) async {
-            final position = Duration(seconds: value.toInt());
-            await audioPlayer.seek(position);
-            //  !Optinal: Play audio if was paused
-            await audioPlayer.resume();
-          },
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(formatTime(position)),
-              Text(formatTime(duration - position)),
-            ],
+          Slider(
+            min: 0,
+            max: duration.inSeconds.toDouble(),
+            value: position.inSeconds.toDouble(),
+            onChanged: (value) async {
+              final position = Duration(seconds: value.toInt());
+              await audioPlayer.seek(position);
+              //  !Optinal: Play audio if was paused
+              await audioPlayer.resume();
+            },
           ),
-        ),
-        CircleAvatar(
-          radius: 35,
-          child: IconButton(
-              icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
-              onPressed: () async {
-                if (isPlaying) {
-                  await audioPlayer.pause();
-                } else {
-                  String url =
-                      "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
-                  await audioPlayer.play(url);
-                }
-              }),
-        )
-      ],
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(formatTime(position)),
+                Text(formatTime(duration - position)),
+              ],
+            ),
+          ),
+          CircleAvatar(
+            radius: 35,
+            child: IconButton(
+                icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
+                onPressed: () async {
+                  if (isPlaying) {
+                    await audioPlayer.pause();
+                  } else {
+                    String url =
+                        "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
+                    await audioPlayer.play(url);
+                  }
+                }),
+          )
+        ],
+      ),
     ));
   }
 }
