@@ -31,31 +31,15 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    final data = [
-      "this is one",
-      "this is two",
-      "this is three",
-      "this is four",
-      "this is five",
-      "this is six",
-      "this is seven",
-      "this is eight",
-      "this is nine",
-      "this is ten",
-      "this is eleven",
-    ];
     return Scaffold(
         appBar: AppBar(
           title: const Text('Grid View'),
         ),
-        body: ListView.builder(
-            itemCount: data.length,
-            itemBuilder: ((context, index) {
-              return Container(
-                color: Colors.red,
-                height: 100,
-                child: Text('$data[index]'),
-              );
-            })));
+        body: Column(
+          children: [
+            ElevatedButton(onPressed: () {}, child: const Text('Bangla')),
+            ElevatedButton(onPressed: () {}, child: const Text('English')),
+          ],
+        ));
   }
 }
