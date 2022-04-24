@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_practice/languages.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,7 +12,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      translations: Languages(),
+      locale: const Locale('en', 'US'),
+      fallbackLocale: const Locale('en', 'US'),
       title: 'Flutter Demo',
       theme: ThemeData(
         // is not restarted.
@@ -41,16 +46,24 @@ class _MyHomePageState extends State<MyHomePage> {
             children: [
               Card(
                 child: Column(
-                  children: const [
+                  children: [
                     ListTile(
-                      title: Text('Some Demo TExt'),
-                      subtitle: Text('This is subtitle'),
+                      title: Text('title'.tr),
+                      subtitle: Text('subtitle'.tr),
                     )
                   ],
                 ),
               ),
-              ElevatedButton(onPressed: () {}, child: const Text('Bangla')),
-              ElevatedButton(onPressed: () {}, child: const Text('English')),
+              ElevatedButton(
+                  onPressed: () {
+                    Get.updateLocale(const Locale('bn', 'BD'));
+                  },
+                  child: const Text('Bangla')),
+              ElevatedButton(
+                  onPressed: () {
+                    Get.updateLocale(const Locale('en', 'US'));
+                  },
+                  child: const Text('English')),
             ],
           ),
         ));
