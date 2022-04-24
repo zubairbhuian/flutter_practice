@@ -33,13 +33,26 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Grid View'),
+          title: const Text('GetX'),
         ),
-        body: Column(
-          children: [
-            ElevatedButton(onPressed: () {}, child: const Text('Bangla')),
-            ElevatedButton(onPressed: () {}, child: const Text('English')),
-          ],
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Card(
+                child: Column(
+                  children: const [
+                    ListTile(
+                      title: Text('Some Demo TExt'),
+                      subtitle: Text('This is subtitle'),
+                    )
+                  ],
+                ),
+              ),
+              ElevatedButton(onPressed: () {}, child: const Text('Bangla')),
+              ElevatedButton(onPressed: () {}, child: const Text('English')),
+            ],
+          ),
         ));
   }
 }
