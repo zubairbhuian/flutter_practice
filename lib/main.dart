@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         // is not restarted.
@@ -31,31 +32,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    final data = [
-      "this is one",
-      "this is two",
-      "this is three",
-      "this is four",
-      "this is five",
-      "this is six",
-      "this is seven",
-      "this is eight",
-      "this is nine",
-      "this is ten",
-      "this is eleven",
-    ];
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Grid View'),
+          title: const Text('Fetch Data'),
         ),
-        body: ListView.builder(
-            itemCount: data.length,
-            itemBuilder: ((context, index) {
-              return Container(
-                color: Colors.red,
-                height: 100,
-                child: Text('$data[index]'),
-              );
-            })));
+        body: const Center(
+          child: Text('This is demo text'),
+        ));
   }
 }
