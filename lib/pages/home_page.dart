@@ -14,7 +14,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var url = 'https://jsonplaceholder.typicode.com/photos';
-  var data;
+  var data = [];
   @override
   void initState() {
     super.initState();
@@ -28,9 +28,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future fetchData() async {
     var res = await http.get(Uri.parse(url));
-    setState(() {
-      data = jsonDecode(res.body);
-    });
+    data = jsonDecode(res.body);
+    setState(() {});
   }
 
   @override
@@ -39,11 +38,17 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           title: const Text('Fetch Data'),
         ),
-        body: ListView.builder(
-          itemBuilder: (_, index) => const ListTile(
-            title: Text('kkk'),
-          ),
-          itemCount: data.l,
-        ));
+        body:ListView.builder(
+                itemBuilder: (_, index) => Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListTile(
+                    title: Text(data[index]['title']),
+                    leading: Image.network(data[index]['url']),
+                    onTap: () {},
+                  ),
+                ),
+                itemCount: data.length,
+              )
+            );
   }
 }
