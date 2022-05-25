@@ -6,7 +6,7 @@ class DemoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Demo Page')),
+      appBar: AppBar(title: const Text('Demo Page')),
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_practice/controler/count_controler.dart';
+import 'package:get/get.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -12,21 +12,30 @@ class Home extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            '0',
-            style: TextStyle(
-                color: Colors.red, fontSize: 22, fontWeight: FontWeight.bold),
+          GetBuilder<CountControler>(
+            init: CountControler(),
+            builder: (_) => Text(
+              '${_.count}',
+              style: const TextStyle(
+                  color: Colors.red, fontSize: 22, fontWeight: FontWeight.bold),
+            ),
           ),
           const SizedBox(
             height: 40,
           ),
           Center(
               child: ElevatedButton(
-                  onPressed: () {}, child: const Text('Next Screen')))
+                  onPressed: () {
+                    Get.toNamed("/about");
+                  },
+                  child: const Text('Next Screen')))
         ],
       ),
-      floatingActionButton:
-          FloatingActionButton(onPressed: () {}, child: const Icon(Icons.add)),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Get.find<CountControler>().incriment();
+          },
+          child: const Icon(Icons.add)),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_practice/screens/about_screen.dart';
 import 'package:flutter_practice/screens/home.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +14,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      initialRoute: '/',
+      getPages: [
+        GetPage(name: '/', page: () => const Home()),
+        GetPage(name: '/about', page: () =>  AboutScreen()),
+      ],
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
