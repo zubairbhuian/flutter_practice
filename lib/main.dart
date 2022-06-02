@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,19 +11,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Future Build with https',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: const SafeArea(
-        child: Scaffold(
-          body: Center(
-            child: Text(
-              'بَ',
-              style: TextStyle(fontSize: 30),
+        debugShowCheckedModeBanner: false,
+        title: 'Future Build with https',
+        theme: ThemeData(primarySwatch: Colors.blue),
+        home: SafeArea(
+          child: Scaffold(
+            body: Center(
+              child: SizedBox(
+                child: Text(
+                  'بَ',
+                  style: GoogleFonts.amiri(
+                      textStyle: const TextStyle(fontSize: 30)),
+                ),
+              ),
             ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }
