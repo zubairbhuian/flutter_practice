@@ -29,33 +29,45 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final GlobalKey _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    double screenWith = MediaQuery.of(context).size.width;
-    double screenHight = MediaQuery.of(context).size.height;
-
     return Scaffold(
-        body: Container(
-      color: Colors.blue,
-      height: double.maxFinite,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Flexible(
-            child: Container(
-              width: double.maxFinite,
-              height: 700,
-              color: Colors.red,
-              child: Column(
-                children: [
-                  Text("$screenWith, $screenHight "),
-                  const Text('Demo One'),
-                ],
-              ),
-            )
-          ),
-        ],
+        body: Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextFormField(
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red),
+                      borderRadius: BorderRadius.all(Radius.circular(4.0)))),
+              validator: (String? value) {
+                return (value != null && value.contains('@'))
+                    ? 'Do not use the @ char.'
+                    : null;
+              },
+            ),
+            TextFormField(validator: (String? value) {
+              return (value != null && value.contains('@'))
+                  ? 'Do not use the @ char.'
+                  : null;
+            }),
+            ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    
+                  }
+                },
+                child: const Text("Send"))
+          ],
+        ),
       ),
     ));
   }
 }
+
+class AppColor {}
