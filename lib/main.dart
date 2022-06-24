@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_practice/languages.dart';
+import 'package:flutter_practice/views/home_screen.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -13,59 +13,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      translations: Languages(),
-      locale: const Locale('en', 'US'),
-      fallbackLocale: const Locale('en', 'US'),
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: const HomeScreen(),
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('GetX'),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Card(
-                child: Column(
-                  children: [
-                    ListTile(
-                      title: Text('title'.tr),
-                      subtitle: Text('subtitle'.tr),
-                    )
-                  ],
-                ),
-              ),
-              ElevatedButton(
-                  onPressed: () {
-                    Get.updateLocale(const Locale('bn', 'BD'));
-                  },
-                  child: const Text('Bangla')),
-              ElevatedButton(
-                  onPressed: () {
-                    Get.updateLocale(const Locale('en', 'US'));
-                  },
-                  child: const Text('English')),
-            ],
-          ),
-        ));
   }
 }
