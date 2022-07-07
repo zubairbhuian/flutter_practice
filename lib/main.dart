@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:card_swiper/card_swiper.dart';
+import 'package:flutter_practice/models.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,51 +13,64 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: const MyCardSwiper(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+class MyCardSwiper extends StatelessWidget {
+  const MyCardSwiper({Key? key}) : super(key: key);
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    double screenWith = MediaQuery.of(context).size.width;
-    double screenHight = MediaQuery.of(context).size.height;
-
     return Scaffold(
-        body: Container(
-      color: Colors.blue,
-      height: double.maxFinite,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      backgroundColor: Colors.deepPurple[100],
+      appBar: AppBar(title: const Text('Card Swiper')),
+      body: Column(
         children: [
-          Flexible(
-            child: Container(
-              width: double.maxFinite,
-              height: 700,
-              color: Colors.red,
-              child: Column(
-                children: [
-                  Text("$screenWith, $screenHight "),
-                  const Text('Demo One'),
-                ],
+          SizedBox(
+            height: 200,
+            child: Swiper(
+              itemCount: sliderItems.length,
+              autoplay: true,
+              autoplayDelay: 5000,
+              curve: Curves.easeIn,
+              layout: SwiperLayout.DEFAULT,
+              pagination: const SwiperPagination(
+                builder: DotSwiperPaginationBuilder(),
               ),
-            )
+              itemBuilder: (BuildContext context, int index) {
+                return Card(
+                  semanticContainer: true,
+                  elevation: 10,
+                  margin: const EdgeInsets.only(
+                    top: 10,
+                    bottom: 30,
+                    left: 10,
+                    right: 10,
+                  ),
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: BannerImageModel(
+                    sliderItems[index],
+                    fit: BoxFit.cover,
+                    width: 200,
+                    height: 200,
+                  ),
+                );
+              },
+            ),
           ),
         ],
       ),
-    ));
+    );
   }
 }
