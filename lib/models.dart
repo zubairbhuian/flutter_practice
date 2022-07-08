@@ -27,5 +27,5 @@ class BannerImageModel extends StatelessWidget {
       width: width,
       height: height,
     );
-  }
+  } 
 }
